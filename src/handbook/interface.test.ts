@@ -1,5 +1,3 @@
-import stringMatching = jasmine.stringMatching;
-
 describe('define interface', () => {
   it('basic', () => {
     interface Name {
@@ -114,11 +112,11 @@ describe('define interface', () => {
     interface ClockInterface {
       currentTime: Date;
 
-      setTime(d: Date);
+      setTime(d: Date): void;
     }
 
     class Clock implements ClockInterface {
-      currentTime: Date;
+      currentTime: Date = new Date();
 
       setTime(d: Date) {
         this.currentTime = d;
@@ -171,8 +169,7 @@ describe('define interface', () => {
       lastName: string
     }
 
-    let fn;
-    fn = <FullName>function (): string {
+    let fn = <FullName>function (): string {
       return fn.firstName + ' ' + fn.lastName;
     };
     fn.firstName = 'foo';

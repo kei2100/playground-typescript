@@ -35,9 +35,9 @@ describe('define enum', () => {
 describe('define void', () => {
   it('basic', () => {
     const f = function (): void {
-      // return 'a'; // voidなのでreturn stringできない
+      // return 'a'; // void なので return string|null できない
+      // return null;
       if (1 === 1) {
-        return null;
       } else {
         return undefined; // null or undefined ok
       }
@@ -47,10 +47,9 @@ describe('define void', () => {
   });
 
   it('meaningless', () => {
-    const m1: void = undefined; // voidの場合, null or undefinedしか割り当てることはできない
-    const m2: void = null;
+    const m1: void = undefined; // voidの場合, undefinedしか割り当てることはできない
+    // const m2: void = null; // null は割り当てられない
     expect(m1).toBe(undefined);
-    expect(m2).toBe(null);
   });
 });
 

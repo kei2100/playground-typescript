@@ -48,7 +48,7 @@ describe('function overload', () => {
   function num2StrOrStr2Num(x: number): string;
   function num2StrOrStr2Num(x: string): number;
   // 関数定義本体
-  function num2StrOrStr2Num(x) {
+  function num2StrOrStr2Num(x: string|number) {
     if (typeof x === 'string') {
       return parseInt(x, 10);
     }

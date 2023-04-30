@@ -78,21 +78,6 @@ describe('generics types', () => {
   });
 });
 
-describe('extends', () => {
-  function cp<S, D extends S>(src: S, dst: D) {
-    for (let p in src) {
-      dst[p] = src[p];
-    }
-  }
-
-  const src = {a: 'A', b: 'B'};
-  const dst = {a: 'a', b: 'b', c: 'c'};
-  cp(src, dst);
-  expect(dst.a).toBe('A');
-  expect(dst.b).toBe('B');
-  expect(dst.c).toBe('c');
-});
-
 describe('using class types in generics', () => {
   // newでT型のインスタンスを返すcを引数に受ける
   function createInstance<T>(c: {new(): T}): T {

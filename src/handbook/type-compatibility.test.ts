@@ -6,15 +6,15 @@ describe('basics', () => {
       name: string;
     }
     class Person {
-      name: string;
+      name: string = "";
     }
 
     let named: Named;
     named = new Person(); // name: string を満たしているので問題なし
 
     class PersonWithAge {
-      name: string;
-      age: number;
+      name: string = "";
+      age: number = 0;
     }
     let person: Person;
     person = new PersonWithAge()  // class同士でも, name: string を満たしているので問題なし
@@ -23,7 +23,7 @@ describe('basics', () => {
 
 describe('function compatibility', () => {
   it('behaves', () => {
-    let x: (a: number) => 0;
+    let x!: (a: number) => 0;
     let y: (a: number, b: string) => 0;
 
     y = x; // ok. yの実体はxとなるが、この場合、bはxでは無視されると言えるので大丈夫（jsにおいて、引数の無視はもともと可能）
@@ -37,7 +37,7 @@ describe('generics', () => {
     }
 
     let x: Empty<string>;
-    let y: Empty<string>;
+    let y!: Empty<string>;
     x = y; // ok. Tが意識されるような使い方をしないため。
 
     interface NotEmpty<T> {

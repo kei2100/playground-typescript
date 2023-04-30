@@ -4,7 +4,7 @@ describe('public protected private', () => {
     private name: string;
 
     // protected修飾子は継承したクラスからもアクセス可能
-    protected say: string;
+    protected say: string = "";
 
     constructor(name: string) {
       this.name = name;
@@ -98,8 +98,8 @@ describe('abstract class', () => {
 
 describe('using class as an interface', () => {
   class Point {
-    x: number;
-    y: number;
+    x: number = 0;
+    y: number = 0;
   }
 
   // class宣言はコンストラクタ関数と、そのインスタンスを表す型という2つのものを作成するので、

@@ -68,7 +68,7 @@ describe('best common type', () => {
 describe('contextual type', () => {
   it('behavior', () => {
     interface myFunc {
-      (v: string)
+      (v: string): any
     }
 
     let myf: myFunc;
