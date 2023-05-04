@@ -1,8 +1,3 @@
-// $ npx ts-node src/v5/decorator.ts
-// LOG: Entering method greet.
-// Hello, my name is Ron
-// LOG: Exiting method greet.
-
 class Person {
     private readonly name: string;
 
@@ -11,6 +6,7 @@ class Person {
     }
 
     @loggedMethod
+    @bound
     greet() {
         console.log(`Hello, my name is ${this.name}`);
     }
@@ -26,5 +22,27 @@ function loggedMethod(orig: any, context: ClassMethodDecoratorContext) {
     }
 }
 
+function bound(originalMethod: any, context: ClassMethodDecoratorContext) {
+    const methodName = context.name;
+    if (context.private) {
+        throw new Error(`'bound' cannot decorate private properties like ${methodName as string}.`);
+    }
+    context.addInitializer(function () {
+        // @ts-ignore
+        this[methodName] = this[methodName].bind(this);
+    });
+}
+
+// $ npx ts-node src/v5/decorator.ts
+// LOG: Entering method greet.
+// Hello, my name is Ron
+// LOG: Exiting method greet.
 const p = new Person("Ron");
 p.greet();
+
+// @bound により this が既にバインドされているので、同様に動作する
+// LOG: Entering method greet.
+// Hello, my name is Ron
+// LOG: Exiting method greet.
+const greet = p.greet;
+greet();
